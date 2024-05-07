@@ -1,8 +1,8 @@
 <template>
-  <ul class="list-group">
+  <ul class="list-group col-md-4">
     <VideoListItem
      v-for="video in videos"
-     :key="video.id"
+     :key="video.id.videoId"
      :video="video"
      @videoSelect="onVideoSelect">
     </VideoListItem>
@@ -18,7 +18,7 @@ export default {
     videos: Array
   },
   components: {
-    VideoListItem
+    VideoListItem: VideoListItem
   },
   methods: {
     onVideoSelect(video) {
@@ -29,4 +29,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>
