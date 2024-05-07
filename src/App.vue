@@ -1,12 +1,22 @@
 <template>
   <div id="app">
-    <h1>YouTube Video Browser</h1>
+    <SearchBar @termChange="onTermChange"></SearchBar>
   </div>
 </template>
 
 <script>
+import SearchBar from "./components/SearchBar";
+
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    SearchBar
+  },
+  methods: {
+    onTermChange(searchTerm) {
+      console.log('Search term changed:', searchTerm);
+    }
+  }
 };
 </script>
 
