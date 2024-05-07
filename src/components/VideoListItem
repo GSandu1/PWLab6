@@ -1,0 +1,26 @@
+<template>
+  <li class="list-group-item" @click="onVideoSelect">
+    <div>{{ video.title }}</div>
+  </li>
+</template>
+
+<script>
+export default {
+  name: "VideoListItem",
+  props: ['video'],
+  methods: {
+    onVideoSelect() {
+      this.$emit('videoSelect', this.video);
+    }
+  }
+};
+</script>
+
+<style scoped>
+li {
+  cursor: pointer;
+}
+li:hover {
+  background-color: #eee;
+}
+</style>
