@@ -17,7 +17,7 @@ import SearchBar from "./components/SearchBar";
 import VideoList from './components/VideoList';
 import VideoDetail from './components/VideoDetail';
 
-const API_KEY = 'AIzaSyCrS_fgQDO6RWv7AdcxIde89t7It8IOcvc';
+const API_KEY = 'AIzaSyCYKsZPI3YLGukHupLE2Mazc4tGbnxgp80';
 const YOUTUBE_V3_URL = 'https://www.googleapis.com/youtube/v3/search';
 export default {
   name: "App",
