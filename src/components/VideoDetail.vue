@@ -6,6 +6,7 @@
     <div class="detail">
       <h4>{{video.snippet.title}}</h4>
       <p>{{video.snippet.description}}</p>
+      <button @click="likeVideo" class="btn btn-primary">Like</button>
     </div>
   </div>
 </template>
@@ -19,6 +20,18 @@ export default {
     videoUrl() {
       return `${YOUTUBE_URL}${this.video.id.videoId}`;
     }
+  },
+  methods: {
+    likeVideo() {
+      const likedVideos = JSON.parse(localStorage.getItem('likedVideos')) || [];
+      if (!likedVideos.includes(this.video.id.videoId)) {
+        likedVideos.push(this.video.id.videoId);
+        localStorage.setItem('likedVideos', JSON.stringify(likedVideos));
+        alert('Video liked!');
+      } else {
+        alert('You already liked this video!');
+      }
+    }
   }
 };
 </script>
@@ -29,5 +42,9 @@ export default {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+
+.btn-primary {
+  margin-top: 10px;
 }
 </style>
