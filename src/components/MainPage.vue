@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="searchDiv">
       <SearchBar @termChange="fetchVideos" />
       <div class="row">
         <VideoDetail :video="selectVideo" />
@@ -35,3 +35,8 @@
   };
   </script>
   
+  <style>
+    .searchDiv{
+      margin-top: 30px;
+    }
+  </style>

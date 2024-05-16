@@ -37,6 +37,14 @@ li {
   cursor: pointer;
 }
 li:hover {
-  background-color: #eee;
 }
+
+.media{
+  background-color: var(--background-color);
+}
+
+.list-group-item{
+  background-color: var(--background-color)!important;
+}
+
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <h2>Liked Videos</h2>
+      <h2 class="h2div">Liked Videos</h2>
       <div class="row">
         <VideoDetail
           v-for="video in filteredVideos"
@@ -30,8 +30,10 @@
     computed: {
       filteredVideos() {
         return this.videos.filter(video => this.likedVideoIds.includes(video.id.videoId));
-      }
+      },
+      
     },
+    
     methods: {
       handleUnlikeVideo(videoId) { 
         const index = this.likedVideoIds.indexOf(videoId);
@@ -49,6 +51,13 @@
     .embed-responsive-item {
       width: 100%;
       height: 200px; 
+    }
+
+    .h2div{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
     }
     </style>
     

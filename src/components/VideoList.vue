@@ -28,6 +28,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+
+.list-group{
+  background-color: var(--background-color);
+}
 
 </style>

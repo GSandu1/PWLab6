@@ -1,6 +1,10 @@
 <template>
   <div id="app" class="container">
-    <button @click="drawerOpen = !drawerOpen" class="drawer-toggle">Toggle Drawer</button>
+    <button @click="drawerOpen = !drawerOpen" class="drawer-toggle"><svg width="20px" height="20px" viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 12.32H22" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2 18.32H22" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2 6.32001H22" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></button>
     <Drawer :is-open="drawerOpen" :is-dark-theme="darkTheme" 
             @toggle-drawer="drawerOpen = !drawerOpen"
             @toggle-theme="toggleTheme" />
@@ -15,7 +19,7 @@ import axios from "axios";
 import Drawer from './components/Drawer.vue';
 
 
-const API_KEY = '';
+const API_KEY = 'AIzaSyCv3vVb3kGXz9uMPygQ9V9io6nzhyQpsoQ';
 const YOUTUBE_V3_URL = 'https://www.googleapis.com/youtube/v3/search';
 
 export default {
@@ -68,6 +72,7 @@ export default {
 :root {
   --background-color: #fff;
   --text-color: #000;
+  --text-color-hover: #fff;
   --input-background: #fff;
   --input-text: #000;
 }
@@ -76,6 +81,7 @@ export default {
 .dark-theme {
   --background-color: #333;
   --text-color: #fff;
+  --text-color-hover:#000000;
   --input-background: #555;
   --input-text: #fff;
 }
@@ -88,6 +94,30 @@ body {
 input {
   background-color: var(--input-background);
   color: var(--input-text);
+}
+
+.drawer-toggle {
+  position: fixed; 
+  top: 20px; 
+  left: 20px; 
+  padding: 10px 20px; 
+  color: white;
+  border: none; 
+  border-radius: 12px; 
+  font-size: 16px;
+  cursor: pointer; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+  transition: background-color 0.3s, box-shadow 0.3s; 
+  outline: none; 
+}
+
+.drawer-toggle:hover {
+  background-color: #0056b3; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+}
+
+.drawer-toggle:focus {
+  outline: none; 
 }
 
 
