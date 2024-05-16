@@ -2,36 +2,53 @@
     <div class="container">
       <h2>Liked Videos</h2>
       <div class="row">
-        <div class="col-md-4" v-for="videoId in videoIds" :key="videoId">
-          <iframe class="embed-responsive-item" :src="getVideoUrl(videoId)" allowfullscreen></iframe>
-        </div>
+        <VideoDetail
+          v-for="video in filteredVideos"
+          :key="video.id.videoId"
+          :video="video"
+          :isLiked="true"
+          @unlikeVideo="handleUnlikeVideo"
+        />
       </div>
     </div>
   </template>
   
   <script>
+  import VideoDetail from './VideoDetail.vue';
+  
   export default {
     name: 'LikedVideos',
+    components: {
+      VideoDetail
+    },
+    props: ['videos'],
     data() {
       return {
-        videoIds: []
+        likedVideoIds: JSON.parse(localStorage.getItem('likedVideos')) || []
       };
     },
-    mounted() {
-      this.videoIds = JSON.parse(localStorage.getItem('likedVideos')) || [];
+    computed: {
+      filteredVideos() {
+        return this.videos.filter(video => this.likedVideoIds.includes(video.id.videoId));
+      }
     },
     methods: {
-      getVideoUrl(videoId) {
-        return `https://www.youtube.com/embed/${videoId}`;
+      handleUnlikeVideo(videoId) { 
+        const index = this.likedVideoIds.indexOf(videoId);
+        if (index > -1) {
+          this.likedVideoIds.splice(index, 1); 
+          localStorage.setItem('likedVideos', JSON.stringify(this.likedVideoIds));
+          this.$emit('unlikeVideo', videoId);
+        }
       }
     }
   };
   </script>
-  
-  <style>
-  .embed-responsive-item {
-    width: 100%;
-    height: 200px; /* Set this according to your layout needs */
-  }
-  </style>
-  
+    
+    <style>
+    .embed-responsive-item {
+      width: 100%;
+      height: 200px; 
+    }
+    </style>
+    

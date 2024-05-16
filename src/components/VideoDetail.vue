@@ -4,37 +4,46 @@
       <iframe class="embed-responsive-item" :src="videoUrl" allowfullscreen></iframe>
     </div>
     <div class="detail">
-      <h4>{{video.snippet.title}}</h4>
-      <p>{{video.snippet.description}}</p>
-      <button @click="likeVideo" class="btn btn-primary">Like</button>
+      <h4>{{ video.snippet.title }}</h4>
+      <p>{{ video.snippet.description }}</p>
+      <button @click="toggleLike" class="btn" :class="{ 'btn-danger': isLiked, 'btn-primary': !isLiked }">
+        {{ isLiked ? 'Unlike' : 'Like' }}
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 const YOUTUBE_URL = "https://www.youtube.com/embed/";
+
 export default {
   name: "VideoDetail",
-  props: ["video"],
+  props: ["video", "isLiked"],
   computed: {
     videoUrl() {
       return `${YOUTUBE_URL}${this.video.id.videoId}`;
     }
   },
   methods: {
-    likeVideo() {
-      const likedVideos = JSON.parse(localStorage.getItem('likedVideos')) || [];
-      if (!likedVideos.includes(this.video.id.videoId)) {
-        likedVideos.push(this.video.id.videoId);
-        localStorage.setItem('likedVideos', JSON.stringify(likedVideos));
-        alert('Video liked!');
-      } else {
-        alert('You already liked this video!');
+    toggleLike() {
+    const likedVideos = JSON.parse(localStorage.getItem('likedVideos')) || [];
+    const videoId = this.video.id.videoId;
+    if (this.isLiked) {
+      const index = likedVideos.indexOf(videoId);
+      if (index > -1) {
+        likedVideos.splice(index, 1);
       }
+    } else {
+      likedVideos.push(videoId);
     }
+    localStorage.setItem('likedVideos', JSON.stringify(likedVideos));
+    this.$emit(this.isLiked ? 'unlikeVideo' : 'likeVideo', videoId);
+
+  }
   }
 };
 </script>
+
 
 <style scoped>
 .detail {

@@ -5,14 +5,16 @@
       <router-link to="/">Home</router-link>
       <router-link to="/likedvideos">Liked Videos</router-link>
     </nav>
-    <router-view :videos="videos" :selectVideo="selectVideo" @videoSelect="onVideoSelect"></router-view>
+    <router-view :videos="videos" :selectVideo="selectVideo" :handleUnlike="handleUnlike" 
+                 @videoSelect="onVideoSelect" @termChange="fetchVideos">
+    </router-view>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 
-const API_KEY = '';
+const API_KEY = 'AIzaSyCYKsZPI3YLGukHupLE2Mazc4tGbnxgp80';
 const YOUTUBE_V3_URL = 'https://www.googleapis.com/youtube/v3/search';
 
 export default {
@@ -41,13 +43,21 @@ export default {
       .then(response => {
         this.videos = response.data.items;
       });
+    },
+    onVideoSelect(video) {
+      this.selectVideo = video;
+    },
+    handleUnlike(videoId) {
+      const likedVideos = JSON.parse(localStorage.getItem('likedVideos')) || [];
+      const updatedLikedVideos = likedVideos.filter(id => id !== videoId);
+      localStorage.setItem('likedVideos', JSON.stringify(updatedLikedVideos));
+      this.fetchVideos();
     }
   }
 };
 </script>
 
-
-<style >
+<style>
 
 :root {
   --background-color: #fff;
