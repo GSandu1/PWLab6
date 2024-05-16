@@ -1,5 +1,5 @@
 <template>
-  <li class="media list-group-item" @click="onVideoSelect">
+  <li class="media " @click="onVideoSelect">
     <img class="mr-3" :src="thumbnailUrl" alt="">
     <div class="media-body">
       <h5 class="mt-0">{{videoTitle}}</h5>
@@ -37,6 +37,6 @@ li {
   cursor: pointer;
 }
 li:hover {
-  background-color: #eee;
+  /* background-color: #eee; */
 }
 </style>

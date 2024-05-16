@@ -1,49 +1,35 @@
 <template>
   <div id="app" class="container">
     <button @click="toggleTheme">Toggle Theme</button>
-    <SearchBar @termChange="onTermChange"></SearchBar>
-    <div class="row">
-      <VideoDetail :video="selectVideo"></VideoDetail>
-      <VideoList
-      :videos="videos"
-      @videoSelect="onVideoSelect">
-      </VideoList>
-    </div>
+    <nav>
+      <router-link to="/">Home</router-link>
+      <router-link to="/likedvideos">Liked Videos</router-link>
+    </nav>
+    <router-view :videos="videos" :selectVideo="selectVideo" @videoSelect="onVideoSelect"></router-view>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import SearchBar from "./components/SearchBar";
-import VideoList from './components/VideoList';
-import VideoDetail from './components/VideoDetail';
 
 const API_KEY = '';
 const YOUTUBE_V3_URL = 'https://www.googleapis.com/youtube/v3/search';
+
 export default {
   name: "App",
-  components: {
-    SearchBar: SearchBar,
-    VideoList: VideoList,
-    VideoDetail: VideoDetail
-  },
   data() {
     return {
       videos: [],
       selectVideo: null,
-      darkTheme: false // Theme state
-    }
+      darkTheme: false
+    };
   },
   methods: {
     toggleTheme() {
       this.darkTheme = !this.darkTheme;
-      if (this.darkTheme) {
-        document.body.classList.add("dark-theme");
-      } else {
-        document.body.classList.remove("dark-theme");
-      }
+      document.body.className = this.darkTheme ? "dark-theme" : "";
     },
-    onTermChange(searchTerm) {
+    fetchVideos(searchTerm) {
       axios.get(YOUTUBE_V3_URL, {
         params: {
           key: API_KEY,
@@ -54,14 +40,12 @@ export default {
       })
       .then(response => {
         this.videos = response.data.items;
-      })
-    },
-    onVideoSelect(video) {
-      this.selectVideo = Object.assign({}, video);  //immutable
+      });
     }
   }
 };
 </script>
+
 
 <style >
 
