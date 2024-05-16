@@ -30,10 +30,8 @@
     computed: {
       filteredVideos() {
         return this.videos.filter(video => this.likedVideoIds.includes(video.id.videoId));
-      },
-      
+      }
     },
-    
     methods: {
       handleUnlikeVideo(videoId) { 
         const index = this.likedVideoIds.indexOf(videoId);

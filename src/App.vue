@@ -19,7 +19,7 @@ import axios from "axios";
 import Drawer from './components/Drawer.vue';
 
 
-const API_KEY = 'AIzaSyCv3vVb3kGXz9uMPygQ9V9io6nzhyQpsoQ';
+const API_KEY = 'AIzaSyCb26l4AVOa7V37RznlWgAbnDZymZAtJ_c';
 const YOUTUBE_V3_URL = 'https://www.googleapis.com/youtube/v3/search';
 
 export default {
